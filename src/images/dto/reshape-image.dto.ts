@@ -8,7 +8,6 @@ import {
   IsNotEmpty,
   Max,
   Min,
-  Validate,
   ValidateIf,
   ValidateNested,
 } from 'class-validator';
@@ -22,15 +21,14 @@ import { Type } from 'class-transformer';
 export class ReshapeImageRequestDto {
   @ApiProperty()
   @IsNotEmpty({
-    context: new ErrorModel(MessageKeys.CONTENT_SHOULD_NOT_BE_EMPTY),
-    message: JSON.stringify(
-      new ErrorModel(MessageKeys.CONTENT_SHOULD_NOT_BE_EMPTY),
-    ),
+    message: new ErrorModel(
+      MessageKeys.CONTENT_SHOULD_NOT_BE_EMPTY,
+    ).toStringify(),
   })
   @IsBase64({
-    message: JSON.stringify(
-      new ErrorModel(MessageKeys.CONTENT_IS_NOT_VALID_BASE64),
-    ),
+    message: new ErrorModel(
+      MessageKeys.CONTENT_IS_NOT_VALID_BASE64,
+    ).toStringify(),
   })
   content: string;
 
@@ -39,20 +37,16 @@ export class ReshapeImageRequestDto {
     isArray: true,
   })
   @ArrayMaxSize(ValueConstants.OPTIONS_MAX_LENGTH, {
-    message: JSON.stringify(
-      new ErrorModel(
-        MessageKeys.OPTIONS_MAX_LENGTH,
-        ValueConstants.OPTIONS_MAX_LENGTH,
-      ),
-    ),
+    message: new ErrorModel(
+      MessageKeys.OPTIONS_MAX_LENGTH,
+      ValueConstants.OPTIONS_MAX_LENGTH,
+    ).toStringify(),
   })
   @ArrayMinSize(ValueConstants.OPTIONS_MIN_LENGTH, {
-    message: JSON.stringify(
-      new ErrorModel(
-        MessageKeys.OPTIONS_MIN_LENGTH,
-        ValueConstants.OPTIONS_MIN_LENGTH,
-      ),
-    ),
+    message: new ErrorModel(
+      MessageKeys.OPTIONS_MIN_LENGTH,
+      ValueConstants.OPTIONS_MIN_LENGTH,
+    ).toStringify(),
   })
   @IsArray()
   @ValidateNested({ each: true })
@@ -63,49 +57,40 @@ export class ReshapeImageRequestDto {
 export class ReshapeImageOptionDto {
   @ApiProperty({ description: 'Can be JPG = 1, WEBP = 2, PNG = 3' })
   @IsEnum(ImageExtensions, {
-    context: new ErrorModel(MessageKeys.INVALID_EXTENSION),
-    message: JSON.stringify(new ErrorModel(MessageKeys.INVALID_EXTENSION)),
+    message: new ErrorModel(MessageKeys.INVALID_EXTENSION).toStringify(),
   })
   extension: ImageExtensions;
 
   @ApiProperty()
   @ValidateIf((_, value) => value != null)
   @Min(ValueConstants.QUALITY_MIN_VALUE, {
-    message: JSON.stringify(
-      new ErrorModel(
-        MessageKeys.QUALITY_GREATER_THAN,
-        ValueConstants.QUALITY_MIN_VALUE,
-      ),
-    ),
+    message: new ErrorModel(
+      MessageKeys.QUALITY_GREATER_THAN,
+      ValueConstants.QUALITY_MIN_VALUE,
+    ).toStringify(),
   })
   @Max(ValueConstants.QUALITY_MAX_VALUE, {
-    message: JSON.stringify(
-      new ErrorModel(
-        MessageKeys.QUALITY_SMALLER_THAN,
-        ValueConstants.QUALITY_MAX_VALUE,
-      ),
-    ),
+    message: new ErrorModel(
+      MessageKeys.QUALITY_SMALLER_THAN,
+      ValueConstants.QUALITY_MAX_VALUE,
+    ).toStringify(),
   })
   quality: number | null;
 
   @Min(ValueConstants.WIDTH_MIN_VALUE, {
-    message: JSON.stringify(
-      new ErrorModel(
-        MessageKeys.WIDTH_GREATER_THAN,
-        ValueConstants.WIDTH_MIN_VALUE,
-      ),
-    ),
+    message: new ErrorModel(
+      MessageKeys.WIDTH_GREATER_THAN,
+      ValueConstants.WIDTH_MIN_VALUE,
+    ).toStringify(),
   })
   @ApiProperty()
   width: number;
 
   @Min(ValueConstants.HEIGHT_MIN_VALUE, {
-    message: JSON.stringify(
-      new ErrorModel(
-        MessageKeys.HEIGHT_GREATER_THAN,
-        ValueConstants.HEIGHT_MIN_VALUE,
-      ),
-    ),
+    message: new ErrorModel(
+      MessageKeys.HEIGHT_GREATER_THAN,
+      ValueConstants.HEIGHT_MIN_VALUE,
+    ).toStringify(),
   })
   @ApiProperty()
   height: number;

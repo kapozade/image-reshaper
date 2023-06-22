@@ -36,4 +36,8 @@ export class ErrorModel {
     this.message = message;
     this.data = data;
   }
+
+  toStringify(): string {
+    return JSON.stringify(this);
+  }
 }
