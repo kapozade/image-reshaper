@@ -22,7 +22,9 @@ export class ImagesController {
   @Post()
   @ApiCreatedResponse({ type: ReshapeImagesResponseDto })
   @ApiBadRequestResponse({ type: ErrorResponseModel })
-  reshapeImage(@Body() req: ReshapeImageRequestDto): ReshapeImagesResponseDto {
-    return new ReshapeImagesResponseDto();
+  async reshapeImage(
+    @Body() req: ReshapeImageRequestDto,
+  ): Promise<ReshapeImagesResponseDto> {
+    return await this.imagesService.reshapeImageAsync(req);
   }
 }
