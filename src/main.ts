@@ -1,10 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
-import { resolve } from 'path';
-import { writeFileSync } from 'fs';
+import { createWriteStream } from 'fs';
 
 import { ImagesModule } from './images/images.module';
+import { get } from 'http';
 
 async function bootstrap() {
   const app = await NestFactory.create(ImagesModule);
@@ -67,10 +67,3 @@ async function bootstrap() {
 }
 
 bootstrap();
-function get(arg0: string, arg1: (response: any) => void) {
-  throw new Error('Function not implemented.');
-}
-
-function createWriteStream(arg0: string): any {
-  throw new Error('Function not implemented.');
-}
