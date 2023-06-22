@@ -1,4 +1,4 @@
-export const ValueConstants = {
+export const ValueConstants = Object.freeze({
   DEFAULT_QUALITY: 85,
   QUALITY_MAX_VALUE: 100,
   QUALITY_MIN_VALUE: 1,
@@ -6,4 +6,4 @@ export const ValueConstants = {
   OPTIONS_MIN_LENGTH: 1,
   HEIGHT_MIN_VALUE: 1,
   WIDTH_MIN_VALUE: 1,
-};
+});
