@@ -10,12 +10,12 @@ import {
   ReshapeImageRequestDto,
   ReshapeImagesResponseDto,
 } from './dto/reshape-image.dto';
-import { ImageReshaperExceptionFilter } from 'src/shared/filters/exception-filter';
 import { ErrorResponseModel } from 'src/shared/dto/error-response-model.dto';
+import { ImageReshaperHttpExceptionFilter } from 'src/shared/filters/http-exception.filter';
 
 @ApiTags('Images')
 @Controller('api/v1/images')
-@UseFilters(ImageReshaperExceptionFilter)
+@UseFilters(ImageReshaperHttpExceptionFilter)
 export class ImagesController {
   constructor(private readonly imagesService: ImagesService) {}
 
