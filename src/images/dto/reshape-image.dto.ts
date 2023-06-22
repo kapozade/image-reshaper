@@ -101,7 +101,7 @@ export class ReshapeImageOptionDto {
 
 export class ReshapeImagesResponseDto {
   @ApiProperty({ type: () => ReshapeImageResponseDto, isArray: true })
-  images: ReshapeImageResponseDto[];
+  images: ReshapeImageResponseDto[] = [];
 }
 
 export class ReshapeImageResponseDto extends ReshapeImageOptionDto {
