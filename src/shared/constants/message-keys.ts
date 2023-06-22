@@ -8,4 +8,5 @@ export const MessageKeys = Object.freeze({
   CONTENT_SHOULD_NOT_BE_EMPTY: 'content.should.not.be.null.or.empty',
   CONTENT_IS_NOT_VALID_BASE64: 'content.is.not.valid.base64',
   INVALID_EXTENSION: 'extension.is.invalid',
+  INTERNAL_SERVER_ERROR: 'internal.server.error',
 });

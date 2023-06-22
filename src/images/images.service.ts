@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Scope } from '@nestjs/common';
 import sharp from 'sharp';
 
 import {
@@ -9,7 +9,9 @@ import {
 import { ImageTypes } from './image-extensions.enum';
 import { ValueConstants } from 'src/shared/constants/value-constants';
 
-@Injectable()
+@Injectable({
+  scope: Scope.REQUEST,
+})
 export class ImagesService {
   async reshapeImageAsync(
     request: ReshapeImageRequestDto,
