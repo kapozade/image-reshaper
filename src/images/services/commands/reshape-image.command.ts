@@ -1,4 +1,4 @@
-import { ImageTypes } from 'src/images/core/image-extensions.enum';
+import { ImageTypes } from 'images/core/image-extensions.enum';
 
 export class ReshapeImageCommand {
   readonly content: string;

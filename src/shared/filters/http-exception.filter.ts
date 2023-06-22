@@ -10,10 +10,10 @@ import { Response } from 'express';
 import {
   ErrorModel,
   ErrorResponseModel,
-} from 'src/shared/models/error-response.model';
-import 'src/shared/utils/string.extensions';
-import { HttpStatusUtils } from 'src/shared/utils/http-status.utils';
-import { MessageKeys } from 'src/shared/constants/message-keys';
+} from 'shared/models/error-response.model';
+import 'shared/utils/string.extensions';
+import { HttpStatusUtils } from 'shared/utils/http-status.utils';
+import { MessageKeys } from 'shared/constants/message-keys';
 
 @Catch(HttpException)
 export class ImageReshaperHttpExceptionFilter implements ExceptionFilter {
@@ -25,7 +25,7 @@ export class ImageReshaperHttpExceptionFilter implements ExceptionFilter {
     const statusCode = this.getStatusCode(exception);
     let errorResponseModel = new ErrorResponseModel();
     if (HttpStatusUtils.IsClientSideError(statusCode)) {
-      errorResponseModel = this.generatePayload(exceptionResponse.message);
+      errorResponseModel = this.generatePayload(exceptionResponse);
     } else {
       errorResponseModel = this.generatePayload([
         MessageKeys.INTERNAL_SERVER_ERROR,
@@ -43,9 +43,16 @@ export class ImageReshaperHttpExceptionFilter implements ExceptionFilter {
     return statusCode;
   }
 
-  generatePayload(errorMessages: string[]): ErrorResponseModel {
+  generatePayload(errorMessages: string[] | string): ErrorResponseModel {
     const errorResponseModel = new ErrorResponseModel();
     if (!errorMessages) return errorResponseModel;
+
+    if (!Array.isArray(errorMessages)) {
+      const errorModel = new ErrorModel(errorMessages);
+      errorResponseModel.addError(errorModel);
+      return errorResponseModel;
+    }
+
     for (const message of errorMessages) {
       let errorModel: ErrorModel | null = (
         message as string

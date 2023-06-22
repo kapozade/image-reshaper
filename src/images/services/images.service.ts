@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import sharp from 'sharp';
 
 import { ImageTypes } from '../core/image-extensions.enum';
-import { ValueConstants } from 'src/shared/constants/value-constants';
+import { ValueConstants } from 'shared/constants/value-constants';
 import {
   ReshapeImageCommand,
   ReshapeImageCommandResult,
