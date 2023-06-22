@@ -4,8 +4,8 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import { ImageTypeUtils } from 'shared/utils/image-type.utils';
-import { ErrorModel } from 'shared/models/error-response.model';
+import { ImageTypeUtils } from 'src/shared/utils/image-type.utils';
+import { ErrorModel } from 'src/shared/models/error-response.model';
 
 @ValidatorConstraint({ name: 'isSupportedImage', async: false })
 export class IsSupportedImage implements ValidatorConstraintInterface {

@@ -10,10 +10,10 @@ import { Response } from 'express';
 import {
   ErrorModel,
   ErrorResponseModel,
-} from 'shared/models/error-response.model';
-import 'shared/utils/string.extensions';
-import { HttpStatusUtils } from 'shared/utils/http-status.utils';
-import { MessageKeys } from 'shared/constants/message-keys';
+} from 'src/shared/models/error-response.model';
+import 'src/shared/utils/string.extensions';
+import { HttpStatusUtils } from 'src/shared/utils/http-status.utils';
+import { MessageKeys } from 'src/shared/constants/message-keys';
 
 @Catch(HttpException)
 export class ImageReshaperHttpExceptionFilter implements ExceptionFilter {

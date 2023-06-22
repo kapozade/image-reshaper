@@ -14,11 +14,11 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
-import { MessageKeys } from 'shared/constants/message-keys';
-import { IsSupportedImage } from 'images/api/validators/is-supported-image';
-import { ImageTypes } from 'images/core/image-extensions.enum';
-import { ErrorModel } from 'shared/models/error-response.model';
-import { ValueConstants } from 'shared/constants/value-constants';
+import { MessageKeys } from 'src/shared/constants/message-keys';
+import { IsSupportedImage } from 'src/images/api/validators/is-supported-image';
+import { ImageTypes } from 'src/images/core/image-extensions.enum';
+import { ErrorModel } from 'src/shared/models/error-response.model';
+import { ValueConstants } from 'src/shared/constants/value-constants';
 
 export class ReshapeImageRequest {
   @ApiProperty()

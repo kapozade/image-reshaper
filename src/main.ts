@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 
-import { ImagesModule } from 'images/images.module';
+import { ImagesModule } from 'src/images/images.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(ImagesModule);
