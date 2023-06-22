@@ -19,6 +19,16 @@
       ]
     }
   ],
+  "rewrites": [
+    {
+      "source": "/swagger/(.*)",
+      "destination": "/public/swagger/$1"
+    },
+    {
+      "source": "/swagger.json",
+      "destination": "/public/swagger.json"
+    }
+  ],
   "env": {
     "TS_NODE_TRANSPILE_ONLY": "true",
     "TS_NODE_PROJECT": "tsconfig.build.json",
