@@ -1,23 +1,19 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import sharp from 'sharp';
 
-import {
-  ReshapeImageRequestDto,
-  ReshapeImageResponseDto,
-  ReshapeImagesResponseDto,
-} from './dto/reshape-image.dto';
-import { ImageTypes } from './image-extensions.enum';
+import { ImageTypes } from '../image-extensions.enum';
 import { ValueConstants } from 'src/shared/constants/value-constants';
-
-@Injectable({
-  scope: Scope.REQUEST,
-})
+import {
+  ReshapeImageCommand,
+  ReshapeImageCommandResult,
+} from './commands/reshape-image.command';
+@Injectable()
 export class ImagesService {
   async reshapeImageAsync(
-    request: ReshapeImageRequestDto,
-  ): Promise<ReshapeImagesResponseDto> {
+    request: ReshapeImageCommand,
+  ): Promise<ReshapeImageCommandResult[]> {
     const buffer = Buffer.from(request.content, 'base64');
-    const result = new ReshapeImagesResponseDto();
+    const result: ReshapeImageCommandResult[] = [];
 
     for (const option of request.options) {
       let client = sharp(buffer).resize(option.width, option.height);
@@ -43,13 +39,14 @@ export class ImagesService {
       }
 
       const reshapeOpResult = await client.withMetadata().toBuffer();
-      const imageResponse = new ReshapeImageResponseDto();
-      imageResponse.content = reshapeOpResult.toString('base64');
-      imageResponse.extension = option.extension;
-      imageResponse.height = option.height;
-      imageResponse.width = option.width;
-      imageResponse.quality = option.quality;
-      result.images.push(imageResponse);
+      const imageResponse = new ReshapeImageCommandResult(
+        reshapeOpResult.toString('base64'),
+        option.width,
+        option.height,
+        option.quality,
+        option.extension,
+      );
+      result.push(imageResponse);
     }
 
     return result;

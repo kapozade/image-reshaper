@@ -20,7 +20,7 @@ import { MessageKeys } from 'src/shared/constants/message-keys';
 import { Type } from 'class-transformer';
 import { IsSupportedImage } from 'src/shared/validators/is-supported-image';
 
-export class ReshapeImageRequestDto {
+export class ReshapeImageRequest {
   @ApiProperty()
   @IsNotEmpty({
     message: new ErrorModel(
@@ -33,10 +33,10 @@ export class ReshapeImageRequestDto {
     ).toStringify(),
   })
   @Validate(IsSupportedImage)
-  content: string;
+  readonly content: string;
 
   @ApiProperty({
-    type: () => ReshapeImageOptionDto,
+    type: () => ReshapeImageOptionRequest,
     isArray: true,
   })
   @ArrayMaxSize(ValueConstants.OPTIONS_MAX_LENGTH, {
@@ -53,16 +53,16 @@ export class ReshapeImageRequestDto {
   })
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => ReshapeImageOptionDto)
-  options: ReshapeImageOptionDto[];
+  @Type(() => ReshapeImageOptionRequest)
+  readonly options: ReshapeImageOptionRequest[];
 }
 
-export class ReshapeImageOptionDto {
+export class ReshapeImageOptionRequest {
   @ApiProperty({ description: 'Can be JPG = 1, WEBP = 2, PNG = 3' })
   @IsEnum(ImageTypes, {
     message: new ErrorModel(MessageKeys.INVALID_EXTENSION).toStringify(),
   })
-  extension: ImageTypes;
+  readonly extension: ImageTypes;
 
   @ApiProperty()
   @ValidateIf((_, value) => value != null)
@@ -78,7 +78,7 @@ export class ReshapeImageOptionDto {
       ValueConstants.QUALITY_MAX_VALUE,
     ).toStringify(),
   })
-  quality: number | null;
+  readonly quality: number | null;
 
   @Min(ValueConstants.WIDTH_MIN_VALUE, {
     message: new ErrorModel(
@@ -87,7 +87,7 @@ export class ReshapeImageOptionDto {
     ).toStringify(),
   })
   @ApiProperty()
-  width: number;
+  readonly width: number;
 
   @Min(ValueConstants.HEIGHT_MIN_VALUE, {
     message: new ErrorModel(
@@ -96,15 +96,5 @@ export class ReshapeImageOptionDto {
     ).toStringify(),
   })
   @ApiProperty()
-  height: number;
-}
-
-export class ReshapeImagesResponseDto {
-  @ApiProperty({ type: () => ReshapeImageResponseDto, isArray: true })
-  images: ReshapeImageResponseDto[] = [];
-}
-
-export class ReshapeImageResponseDto extends ReshapeImageOptionDto {
-  @ApiProperty()
-  content: string;
+  readonly height: number;
 }

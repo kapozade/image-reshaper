@@ -19,7 +19,6 @@ export class GlobalExceptionInterceptor implements NestInterceptor {
       catchError((error) => {
         console.log(error);
         if (HttpStatusUtils.IsClientSideError(error.status)) {
-          console.log(error);
           return throwError(
             () => new BadRequestException(error.response.message),
           );

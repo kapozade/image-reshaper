@@ -4,14 +4,17 @@ import {
   ApiCreatedResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { plainToClass } from 'class-transformer';
 
-import { ImagesService } from './images.service';
-import {
-  ReshapeImageRequestDto,
-  ReshapeImagesResponseDto,
-} from './dto/reshape-image.dto';
+import { ImagesService } from './services/images.service';
+import { ReshapeImageRequest } from './dto/reshape-image.request';
 import { ErrorResponseModel } from 'src/shared/dto/error-response-model.dto';
 import { ImageReshaperHttpExceptionFilter } from 'src/shared/filters/http-exception.filter';
+import {
+  ReshapeImageResponse,
+  ReshapeImagesResponse,
+} from './dto/reshape-image.response';
+import { ReshapeImageCommand } from './services/commands/reshape-image.command';
 
 @ApiTags('Images')
 @Controller('api/v1/images')
@@ -20,11 +23,14 @@ export class ImagesController {
   constructor(private readonly imagesService: ImagesService) {}
 
   @Post()
-  @ApiCreatedResponse({ type: ReshapeImagesResponseDto })
+  @ApiCreatedResponse({ type: ReshapeImagesResponse })
   @ApiBadRequestResponse({ type: ErrorResponseModel })
   async reshapeImage(
-    @Body() req: ReshapeImageRequestDto,
-  ): Promise<ReshapeImagesResponseDto> {
-    return await this.imagesService.reshapeImageAsync(req);
+    @Body() req: ReshapeImageRequest,
+  ): Promise<ReshapeImagesResponse> {
+    const command: ReshapeImageCommand = plainToClass(ReshapeImageCommand, req);
+    const result = await this.imagesService.reshapeImageAsync(command);
+    const reshapedImages = plainToClass(ReshapeImageResponse, result);
+    return new ReshapeImagesResponse(reshapedImages);
   }
 }
