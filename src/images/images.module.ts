@@ -18,7 +18,6 @@ import { RequestBodySizeInterceptor } from 'src/shared/interceptors/request-body
     {
       provide: APP_INTERCEPTOR,
       useClass: RequestBodySizeInterceptor,
-      useValue: 50 * 1024,
     },
   ],
 })
