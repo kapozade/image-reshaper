@@ -11,7 +11,7 @@ import {
   ErrorResponseModel,
 } from '../dto/error-response-model.dto';
 
-import '../extensions/string-extensions';
+import '../utils/string.extensions';
 
 @Catch(BadRequestException)
 export class ImageReshaperExceptionFilter implements ExceptionFilter {

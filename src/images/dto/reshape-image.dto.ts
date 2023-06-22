@@ -8,15 +8,17 @@ import {
   IsNotEmpty,
   Max,
   Min,
+  Validate,
   ValidateIf,
   ValidateNested,
 } from 'class-validator';
 
-import { ImageExtensions } from '../image-extensions.enum';
+import { ImageTypes } from '../image-extensions.enum';
 import { ErrorModel } from '../../shared/dto/error-response-model.dto';
 import { ValueConstants } from '../../shared/constants/value-constants';
 import { MessageKeys } from 'src/shared/constants/message-keys';
 import { Type } from 'class-transformer';
+import { IsSupportedImage } from 'src/shared/validators/is-supported-image';
 
 export class ReshapeImageRequestDto {
   @ApiProperty()
@@ -30,6 +32,7 @@ export class ReshapeImageRequestDto {
       MessageKeys.CONTENT_IS_NOT_VALID_BASE64,
     ).toStringify(),
   })
+  @Validate(IsSupportedImage)
   content: string;
 
   @ApiProperty({
@@ -56,10 +59,10 @@ export class ReshapeImageRequestDto {
 
 export class ReshapeImageOptionDto {
   @ApiProperty({ description: 'Can be JPG = 1, WEBP = 2, PNG = 3' })
-  @IsEnum(ImageExtensions, {
+  @IsEnum(ImageTypes, {
     message: new ErrorModel(MessageKeys.INVALID_EXTENSION).toStringify(),
   })
-  extension: ImageExtensions;
+  extension: ImageTypes;
 
   @ApiProperty()
   @ValidateIf((_, value) => value != null)
