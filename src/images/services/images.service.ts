@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import sharp from 'sharp';
-
-import { ImageTypes } from 'src/images/core/image-extensions.enum';
-import { ValueConstants } from 'src/shared/constants/value-constants';
 import {
   ReshapeImageCommand,
   ReshapeImageCommandResult,
 } from './commands/reshape-image.command';
+import { ImageTypes } from '../core/image-extensions.enum';
+import { ValueConstants } from 'src/shared/constants/value-constants';
+
 @Injectable()
 export class ImagesService {
   async reshapeImageAsync(

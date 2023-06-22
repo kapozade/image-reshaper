@@ -6,14 +6,9 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { Response } from 'express';
-
-import {
-  ErrorModel,
-  ErrorResponseModel,
-} from 'src/shared/models/error-response.model';
-import 'src/shared/utils/string.extensions';
-import { HttpStatusUtils } from 'src/shared/utils/http-status.utils';
-import { MessageKeys } from 'src/shared/constants/message-keys';
+import { MessageKeys } from '../constants/message-keys';
+import { ErrorResponseModel, ErrorModel } from '../models/error-response.model';
+import { HttpStatusUtils } from '../utils/http-status.utils';
 
 @Catch(HttpException)
 export class ImageReshaperHttpExceptionFilter implements ExceptionFilter {
