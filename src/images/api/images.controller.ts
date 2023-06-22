@@ -15,8 +15,8 @@ import {
   ReshapeImageResponse,
   ReshapeImagesResponse,
 } from './models/reshape-image.response';
-import { ImageReshaperHttpExceptionFilter } from 'src/shared/filters/http-exception.filter';
-import { ErrorResponseModel } from 'src/shared/models/error-response.model';
+import { ImageReshaperHttpExceptionFilter } from '../../shared/filters/http-exception.filter';
+import { ErrorResponseModel } from '../../shared/models/error-response.model';
 
 @ApiTags('Images')
 @Controller('api/v1/images')

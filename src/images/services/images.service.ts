@@ -5,7 +5,7 @@ import {
   ReshapeImageCommandResult,
 } from './commands/reshape-image.command';
 import { ImageTypes } from '../core/image-extensions.enum';
-import { ValueConstants } from 'src/shared/constants/value-constants';
+import { ValueConstants } from '../../shared/constants/value-constants';
 
 @Injectable()
 export class ImagesService {

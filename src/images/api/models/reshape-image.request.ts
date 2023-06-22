@@ -14,10 +14,10 @@ import {
 } from 'class-validator';
 
 import { Type } from 'class-transformer';
-import { ImageTypes } from 'src/images/core/image-extensions.enum';
-import { MessageKeys } from 'src/shared/constants/message-keys';
-import { ValueConstants } from 'src/shared/constants/value-constants';
-import { ErrorModel } from 'src/shared/models/error-response.model';
+import { ImageTypes } from '../../../images/core/image-extensions.enum';
+import { MessageKeys } from '../../../shared/constants/message-keys';
+import { ValueConstants } from '../../../shared/constants/value-constants';
+import { ErrorModel } from '../../../shared/models/error-response.model';
 import { IsSupportedImage } from '../validators/is-supported-image';
 
 export class ReshapeImageRequest {

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ImageTypes } from 'src/images/core/image-extensions.enum';
+import { ImageTypes } from '../../../images/core/image-extensions.enum';
 
 export class ReshapeImagesResponse {
   @ApiProperty({ type: () => ReshapeImageResponse, isArray: true })
