@@ -6,15 +6,15 @@ import {
 } from '@nestjs/swagger';
 import { plainToClass } from 'class-transformer';
 
-import { ImagesService } from './services/images.service';
-import { ReshapeImageRequest } from './dto/reshape-image.request';
-import { ErrorResponseModel } from 'src/shared/dto/error-response-model.dto';
+import { ErrorResponseModel } from 'src/shared/models/error-response.model';
 import { ImageReshaperHttpExceptionFilter } from 'src/shared/filters/http-exception.filter';
 import {
   ReshapeImageResponse,
   ReshapeImagesResponse,
-} from './dto/reshape-image.response';
-import { ReshapeImageCommand } from './services/commands/reshape-image.command';
+} from 'src/images/api/models/reshape-image.response';
+import { ReshapeImageCommand } from 'src/images/services/commands/reshape-image.command';
+import { ReshapeImageRequest } from 'src/images/api/models/reshape-image.request';
+import { ImagesService } from 'src/images/services/images.service';
 
 @ApiTags('Images')
 @Controller('api/v1/images')

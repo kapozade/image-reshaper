@@ -9,8 +9,8 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { HttpStatusUtils } from '../utils/http-status.utils';
-import { MessageKeys } from '../constants/message-keys';
+import { HttpStatusUtils } from 'src/shared/utils/http-status.utils';
+import { MessageKeys } from 'src/shared/constants/message-keys';
 
 @Injectable()
 export class GlobalExceptionInterceptor implements NestInterceptor {

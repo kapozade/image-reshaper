@@ -12,13 +12,13 @@ import {
   ValidateIf,
   ValidateNested,
 } from 'class-validator';
-
-import { ImageTypes } from '../image-extensions.enum';
-import { ErrorModel } from '../../shared/dto/error-response-model.dto';
-import { ValueConstants } from '../../shared/constants/value-constants';
-import { MessageKeys } from 'src/shared/constants/message-keys';
 import { Type } from 'class-transformer';
-import { IsSupportedImage } from 'src/shared/validators/is-supported-image';
+
+import { MessageKeys } from 'src/shared/constants/message-keys';
+import { IsSupportedImage } from 'src/images/api/validators/is-supported-image';
+import { ImageTypes } from 'src/images/core/image-extensions.enum';
+import { ErrorModel } from 'src/shared/models/error-response.model';
+import { ValueConstants } from 'src/shared/constants/value-constants';
 
 export class ReshapeImageRequest {
   @ApiProperty()

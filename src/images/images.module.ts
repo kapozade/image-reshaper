@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ImagesController } from './images.controller';
-import { ImagesService } from './services/images.service';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+
+import { ImagesController } from 'src/images/api/images.controller';
 import { GlobalExceptionInterceptor } from 'src/shared/interceptors/global-exception.interceptor';
+import { ImagesService } from 'src/images/services/images.service';
 
 @Module({
   imports: [],
