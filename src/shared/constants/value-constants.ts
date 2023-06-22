@@ -6,4 +6,5 @@ export const ValueConstants = Object.freeze({
   OPTIONS_MIN_LENGTH: 1,
   HEIGHT_MIN_VALUE: 1,
   WIDTH_MIN_VALUE: 1,
+  CONTENT_LENGTH_SIZE: 1 * 1024 * 1024,
 });

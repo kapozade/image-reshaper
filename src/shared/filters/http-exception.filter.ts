@@ -45,6 +45,7 @@ export class ImageReshaperHttpExceptionFilter implements ExceptionFilter {
 
   generatePayload(errorMessages: string[]): ErrorResponseModel {
     const errorResponseModel = new ErrorResponseModel();
+    if (!errorMessages) return errorResponseModel;
     for (const message of errorMessages) {
       let errorModel: ErrorModel | null = (
         message as string

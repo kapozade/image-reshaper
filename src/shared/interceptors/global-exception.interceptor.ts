@@ -4,7 +4,7 @@ import {
   ExecutionContext,
   CallHandler,
   InternalServerErrorException,
-  BadRequestException,
+  HttpException,
 } from '@nestjs/common';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -20,7 +20,11 @@ export class GlobalExceptionInterceptor implements NestInterceptor {
         console.log(error);
         if (HttpStatusUtils.IsClientSideError(error.status)) {
           return throwError(
-            () => new BadRequestException(error.response.message),
+            () =>
+              new HttpException(
+                error.response.message ?? error.response,
+                error.status,
+              ),
           );
         }
         return throwError(
