@@ -9,6 +9,7 @@ import { Response } from 'express';
 import { MessageKeys } from '../constants/message-keys';
 import { ErrorResponseModel, ErrorModel } from '../models/error-response.model';
 import { HttpStatusUtils } from '../utils/http-status.utils';
+import { StringUtils } from '../utils/string.utils';
 
 @Catch(HttpException)
 export class ImageReshaperHttpExceptionFilter implements ExceptionFilter {
@@ -43,16 +44,15 @@ export class ImageReshaperHttpExceptionFilter implements ExceptionFilter {
     if (!errorMessages) return errorResponseModel;
 
     if (!Array.isArray(errorMessages)) {
-      const errorModel = new ErrorModel(errorMessages);
+      let errorModel: ErrorModel | null = StringUtils.TryJSONParse<ErrorModel | null>(errorMessages);
+      if(errorModel == null)
+        errorModel = new ErrorModel(errorMessages);
       errorResponseModel.addError(errorModel);
       return errorResponseModel;
     }
 
     for (const message of errorMessages) {
-      let errorModel: ErrorModel | null = (
-        message as string
-      ).TryJSONParse<ErrorModel>();
-
+      let errorModel: ErrorModel | null = StringUtils.TryJSONParse<ErrorModel | null>(message);
       if (errorModel != null) {
         errorResponseModel.addError(errorModel);
       } else {

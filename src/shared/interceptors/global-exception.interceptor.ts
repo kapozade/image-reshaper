@@ -5,6 +5,7 @@ import {
   CallHandler,
   InternalServerErrorException,
   HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -12,6 +13,7 @@ import { Request } from 'express';
 import { MessageKeys } from '../constants/message-keys';
 import { ValueConstants } from '../constants/value-constants';
 import { HttpStatusUtils } from '../utils/http-status.utils';
+import { ErrorModel } from '../models/error-response.model';
 
 @Injectable()
 export class GlobalExceptionInterceptor implements NestInterceptor {
@@ -26,12 +28,8 @@ export class GlobalExceptionInterceptor implements NestInterceptor {
       return throwError(
         () =>
           new HttpException(
-            'Request body size exceeded the allowed limit',
-            413,
-            {
-              cause: new Error('Request body size exceeded the allowed limit'),
-              description: 'Request body size exceeded the allowed limit',
-            },
+            new ErrorModel('Request body size exceeded the allowed limit', (ValueConstants.CONTENT_LENGTH_SIZE / (1024 * 1024)) + 'MB').toStringify(),
+            HttpStatus.PAYLOAD_TOO_LARGE,
           ),
       );
     }
