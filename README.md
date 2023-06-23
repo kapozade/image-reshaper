@@ -84,3 +84,20 @@ Response:
 | images.0.width | The image width that has been specified in request |
 | images.0.quality | The image quality that has been specified in request |
 | images.0.height | The image height that has been specified in request |
+
+Error response model
+```
+{
+  "errors": [
+    {
+      "message": string,
+      "data": integer | string | boolean | object | null
+    }
+  ]
+}
+```
+| Field | Description |
+| ----- | ----------- |
+| errors | It's an array that contains error message, and sometimes a clue about what should be done in order to prevent from the error.|
+| error.0.message | Error message |
+| error.0.data | It's a clue when used with message in order to prevent from error |
