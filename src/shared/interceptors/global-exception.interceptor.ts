@@ -28,7 +28,10 @@ export class GlobalExceptionInterceptor implements NestInterceptor {
       return throwError(
         () =>
           new HttpException(
-            new ErrorModel('Request body size exceeded the allowed limit', (ValueConstants.CONTENT_LENGTH_SIZE / (1024 * 1024)) + 'MB').toStringify(),
+            new ErrorModel(
+              'Request body size exceeded the allowed limit',
+              ValueConstants.CONTENT_LENGTH_SIZE / (1024 * 1024) + 'MB',
+            ).toStringify(),
             HttpStatus.PAYLOAD_TOO_LARGE,
           ),
       );

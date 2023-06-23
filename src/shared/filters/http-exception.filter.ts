@@ -44,15 +44,16 @@ export class ImageReshaperHttpExceptionFilter implements ExceptionFilter {
     if (!errorMessages) return errorResponseModel;
 
     if (!Array.isArray(errorMessages)) {
-      let errorModel: ErrorModel | null = StringUtils.TryJSONParse<ErrorModel | null>(errorMessages);
-      if(errorModel == null)
-        errorModel = new ErrorModel(errorMessages);
+      let errorModel: ErrorModel | null =
+        StringUtils.TryJSONParse<ErrorModel | null>(errorMessages);
+      if (errorModel == null) errorModel = new ErrorModel(errorMessages);
       errorResponseModel.addError(errorModel);
       return errorResponseModel;
     }
 
     for (const message of errorMessages) {
-      let errorModel: ErrorModel | null = StringUtils.TryJSONParse<ErrorModel | null>(message);
+      let errorModel: ErrorModel | null =
+        StringUtils.TryJSONParse<ErrorModel | null>(message);
       if (errorModel != null) {
         errorResponseModel.addError(errorModel);
       } else {
