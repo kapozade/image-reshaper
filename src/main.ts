@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 
 import { ImagesModule } from './images/images.module';
 
+
 async function bootstrap() {
   const app = await NestFactory.create(ImagesModule);
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
@@ -16,7 +17,16 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
 
-  SwaggerModule.setup('/swagger', app, document);
+  SwaggerModule.setup('/', app, document, {
+    customCssUrl: [
+      'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.1.0/swagger-ui.css',
+      'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.1.0/swagger-ui.min.css',
+    ],
+    customJs: [
+      'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.1.0/swagger-ui-bundle.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.1.0/swagger-ui-standalone-preset.js',
+    ],
+});
 
   await app.listen(3000);
 }
